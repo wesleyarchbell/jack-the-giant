@@ -17,9 +17,9 @@ class GameplayScene: SKScene {
     
     override func didMove(to view: SKView) {
         print("did not to view")
-        self.centre = (self.scene?.size.width)! / (self.scene?.size.height)!
-        self.player = self.childNode(withName: "Player") as? Player
-        self.player?.initPlayerAndAnimations()
+        centre = (scene?.size.width)! / (scene?.size.height)!
+        player = childNode(withName: "Player") as? Player
+        player?.initPlayerAndAnimations()
     }
     
     override func update(_ currentTime: TimeInterval) {
@@ -31,10 +31,10 @@ class GameplayScene: SKScene {
             let location = touch.location(in: self)
             if (location.x > centre!) {
                 moveLeft = false
-                self.player?.animatePlayer()
+                player?.animatePlayer(moveLeft: moveLeft)
             } else {
                 moveLeft = true
-                self.player?.animatePlayer()
+                player?.animatePlayer(moveLeft: moveLeft)
             }
         }
         canMove = true
@@ -42,12 +42,12 @@ class GameplayScene: SKScene {
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         canMove = false
-        self.player?.stopPlayerAnimation()
+        player?.stopPlayerAnimation() 
     }
     
     func managePlayer() {
         if canMove {
-            self.player?.movePlayer(moveLeft: moveLeft)
+            player?.movePlayer(moveLeft: moveLeft)
         }
         
     }
