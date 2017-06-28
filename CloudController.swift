@@ -32,8 +32,9 @@ class CloudController {
         cloud.xScale = 0.9
         cloud.yScale = 0.9
         
-        cloud.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: cloud.size.width, height: cloud.size.height))
+        cloud.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: cloud.size.width - 15, height: cloud.size.height - 6))
         cloud.physicsBody?.affectedByGravity = false
+        cloud.physicsBody?.restitution = 0
         cloud.physicsBody?.categoryBitMask = categoryBitMask
         cloud.physicsBody?.collisionBitMask = ColliderType.Player
         

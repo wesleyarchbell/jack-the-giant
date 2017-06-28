@@ -59,6 +59,10 @@
 		E109EE2E1E52DBAE000E384A /* Quit Button.png in Resources */ = {isa = PBXBuildFile; fileRef = E109EE041E52DBAE000E384A /* Quit Button.png */; };
 		E109EE2F1E52DBAE000E384A /* Start Game Button.png in Resources */ = {isa = PBXBuildFile; fileRef = E109EE051E52DBAE000E384A /* Start Game Button.png */; };
 		E109EE311E52DEB0000E384A /* Player.atlas in Resources */ = {isa = PBXBuildFile; fileRef = E109EE301E52DEB0000E384A /* Player.atlas */; };
+		E149A53E1F038F4400CF8FA1 /* MainMenuScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = E149A53D1F038F4400CF8FA1 /* MainMenuScene.sks */; };
+		E149A5401F03B54A00CF8FA1 /* MainMenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E149A53F1F03B54A00CF8FA1 /* MainMenuScene.swift */; };
+		E149A5431F03B97E00CF8FA1 /* HighScoreScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = E149A5421F03B97E00CF8FA1 /* HighScoreScene.sks */; };
+		E149A5451F03BC9F00CF8FA1 /* OptionScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = E149A5441F03BC9F00CF8FA1 /* OptionScene.sks */; };
 		E1C568B11E65551D005E332A /* Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1C568B01E65551D005E332A /* Background.swift */; };
 		E1C568B31E655AB1005E332A /* CloudController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1C568B21E655AB1005E332A /* CloudController.swift */; };
 /* End PBXBuildFile section */
@@ -118,6 +122,10 @@
 		E109EE041E52DBAE000E384A /* Quit Button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Quit Button.png"; sourceTree = "<group>"; };
 		E109EE051E52DBAE000E384A /* Start Game Button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Start Game Button.png"; sourceTree = "<group>"; };
 		E109EE301E52DEB0000E384A /* Player.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = Player.atlas; sourceTree = "<group>"; };
+		E149A53D1F038F4400CF8FA1 /* MainMenuScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MainMenuScene.sks; sourceTree = "<group>"; };
+		E149A53F1F03B54A00CF8FA1 /* MainMenuScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuScene.swift; sourceTree = "<group>"; };
+		E149A5421F03B97E00CF8FA1 /* HighScoreScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = HighScoreScene.sks; sourceTree = "<group>"; };
+		E149A5441F03BC9F00CF8FA1 /* OptionScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = OptionScene.sks; sourceTree = "<group>"; };
 		E1C568B01E65551D005E332A /* Background.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Background.swift; sourceTree = "<group>"; };
 		E1C568B21E655AB1005E332A /* CloudController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -136,8 +144,9 @@
 		E109ECF11E519181000E384A = {
 			isa = PBXGroup;
 			children = (
+				E149A5411F03B77200CF8FA1 /* Scene */,
 				E109ECFC1E519181000E384A /* Jack The Giant */,
-				E109EDCA1E525EB4000E384A /* Game Classes */,
+				E109EDCA1E525EB4000E384A /* Game */,
 				E109ED151E5191BD000E384A /* Assets */,
 				E109ECFB1E519181000E384A /* Products */,
 			);
@@ -181,16 +190,14 @@
 			name = Assets;
 			sourceTree = "<group>";
 		};
-		E109EDCA1E525EB4000E384A /* Game Classes */ = {
+		E109EDCA1E525EB4000E384A /* Game */ = {
 			isa = PBXGroup;
 			children = (
-				E109EDC81E525B1E000E384A /* GameplayScene.sks */,
-				E109EDCC1E525F5D000E384A /* GameplayScene.swift */,
 				E1C568B01E65551D005E332A /* Background.swift */,
 				E109EDCF1E52D68C000E384A /* Player.swift */,
 				E1C568B21E655AB1005E332A /* CloudController.swift */,
 			);
-			name = "Game Classes";
+			name = Game;
 			sourceTree = "<group>";
 		};
 		E109EDD11E52DBAE000E384A /* 1 - Pause Panel And Buttons */ = {
@@ -315,6 +322,19 @@
 			path = "3 - Main Menu Buttons";
 			sourceTree = "<group>";
 		};
+		E149A5411F03B77200CF8FA1 /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				E109EDC81E525B1E000E384A /* GameplayScene.sks */,
+				E109EDCC1E525F5D000E384A /* GameplayScene.swift */,
+				E149A53D1F038F4400CF8FA1 /* MainMenuScene.sks */,
+				E149A53F1F03B54A00CF8FA1 /* MainMenuScene.swift */,
+				E149A5421F03B97E00CF8FA1 /* HighScoreScene.sks */,
+				E149A5441F03BC9F00CF8FA1 /* OptionScene.sks */,
+			);
+			name = Scene;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -400,7 +420,9 @@
 				E109EE0C1E52DBAE000E384A /* Player.atlas in Resources */,
 				E109EE2A1E52DBAE000E384A /* Highscore Button.png in Resources */,
 				E109EE171E52DBAE000E384A /* Cloud 3.png in Resources */,
+				E149A5431F03B97E00CF8FA1 /* HighScoreScene.sks in Resources */,
 				E109EE311E52DEB0000E384A /* Player.atlas in Resources */,
+				E149A53E1F038F4400CF8FA1 /* MainMenuScene.sks in Resources */,
 				E109EE2C1E52DBAE000E384A /* Music On Button.png in Resources */,
 				E109EE2D1E52DBAE000E384A /* Options Button.png in Resources */,
 				E109EE2F1E52DBAE000E384A /* Start Game Button.png in Resources */,
@@ -414,6 +436,7 @@
 				E109EE1A1E52DBAE000E384A /* Background music.mp3 in Resources */,
 				E109EE0D1E52DBAE000E384A /* Player 1.png in Resources */,
 				E109EE101E52DBAE000E384A /* Player 4.png in Resources */,
+				E149A5451F03BC9F00CF8FA1 /* OptionScene.sks in Resources */,
 				E109EE271E52DBAE000E384A /* Easy Button.png in Resources */,
 				E109EE0F1E52DBAE000E384A /* Player 3.png in Resources */,
 				E109EE241E52DBAE000E384A /* Score.png in Resources */,
@@ -438,6 +461,7 @@
 				E109ED061E519181000E384A /* GameViewController.swift in Sources */,
 				E109EDD01E52D68C000E384A /* Player.swift in Sources */,
 				E109ECFE1E519181000E384A /* AppDelegate.swift in Sources */,
+				E149A5401F03B54A00CF8FA1 /* MainMenuScene.swift in Sources */,
 				E1C568B11E65551D005E332A /* Background.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
