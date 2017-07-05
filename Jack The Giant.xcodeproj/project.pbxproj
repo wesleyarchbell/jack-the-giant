@@ -59,6 +59,8 @@
 		E109EE2E1E52DBAE000E384A /* Quit Button.png in Resources */ = {isa = PBXBuildFile; fileRef = E109EE041E52DBAE000E384A /* Quit Button.png */; };
 		E109EE2F1E52DBAE000E384A /* Start Game Button.png in Resources */ = {isa = PBXBuildFile; fileRef = E109EE051E52DBAE000E384A /* Start Game Button.png */; };
 		E109EE311E52DEB0000E384A /* Player.atlas in Resources */ = {isa = PBXBuildFile; fileRef = E109EE301E52DEB0000E384A /* Player.atlas */; };
+		E11BDE1A1F0CEFB600427132 /* GameplayController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11BDE191F0CEFB600427132 /* GameplayController.swift */; };
+		E11BDE1C1F0CF43300427132 /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11BDE1B1F0CF43300427132 /* GameManager.swift */; };
 		E149A53E1F038F4400CF8FA1 /* MainMenuScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = E149A53D1F038F4400CF8FA1 /* MainMenuScene.sks */; };
 		E149A5401F03B54A00CF8FA1 /* MainMenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E149A53F1F03B54A00CF8FA1 /* MainMenuScene.swift */; };
 		E149A5431F03B97E00CF8FA1 /* HighScoreScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = E149A5421F03B97E00CF8FA1 /* HighScoreScene.sks */; };
@@ -73,7 +75,7 @@
 		E109ECFA1E519181000E384A /* Jack The Giant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Jack The Giant.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E109ECFD1E519181000E384A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E109ED011E519181000E384A /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
-		E109ED051E519181000E384A /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		E109ED051E519181000E384A /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GameViewController.swift; path = "Jack The Giant/GameViewController.swift"; sourceTree = "<group>"; };
 		E109ED081E519181000E384A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E109ED0A1E519181000E384A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E109ED0D1E519181000E384A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -124,6 +126,8 @@
 		E109EE041E52DBAE000E384A /* Quit Button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Quit Button.png"; sourceTree = "<group>"; };
 		E109EE051E52DBAE000E384A /* Start Game Button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Start Game Button.png"; sourceTree = "<group>"; };
 		E109EE301E52DEB0000E384A /* Player.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = Player.atlas; sourceTree = "<group>"; };
+		E11BDE191F0CEFB600427132 /* GameplayController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameplayController.swift; sourceTree = "<group>"; };
+		E11BDE1B1F0CF43300427132 /* GameManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
 		E149A53D1F038F4400CF8FA1 /* MainMenuScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MainMenuScene.sks; sourceTree = "<group>"; };
 		E149A53F1F03B54A00CF8FA1 /* MainMenuScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuScene.swift; sourceTree = "<group>"; };
 		E149A5421F03B97E00CF8FA1 /* HighScoreScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = HighScoreScene.sks; sourceTree = "<group>"; };
@@ -148,6 +152,7 @@
 		E109ECF11E519181000E384A = {
 			isa = PBXGroup;
 			children = (
+				E11BDE181F0CEF9000427132 /* Controller */,
 				E149A5411F03B77200CF8FA1 /* Scene */,
 				E109ECFC1E519181000E384A /* Jack The Giant */,
 				E109EDCA1E525EB4000E384A /* Game */,
@@ -169,7 +174,6 @@
 			children = (
 				E109ECFD1E519181000E384A /* AppDelegate.swift */,
 				E109ED011E519181000E384A /* Actions.sks */,
-				E109ED051E519181000E384A /* GameViewController.swift */,
 				E109ED071E519181000E384A /* Main.storyboard */,
 				E109ED0A1E519181000E384A /* Assets.xcassets */,
 				E109ED0C1E519181000E384A /* LaunchScreen.storyboard */,
@@ -326,6 +330,16 @@
 			path = "3 - Main Menu Buttons";
 			sourceTree = "<group>";
 		};
+		E11BDE181F0CEF9000427132 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				E109ED051E519181000E384A /* GameViewController.swift */,
+				E11BDE191F0CEFB600427132 /* GameplayController.swift */,
+				E11BDE1B1F0CF43300427132 /* GameManager.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
 		E149A5411F03B77200CF8FA1 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
@@ -465,10 +479,12 @@
 				E109EDCD1E525F5D000E384A /* GameplayScene.swift in Sources */,
 				E149A5471F045F4D00CF8FA1 /* HighScoreScene.swift in Sources */,
 				E1C568B31E655AB1005E332A /* CloudController.swift in Sources */,
+				E11BDE1C1F0CF43300427132 /* GameManager.swift in Sources */,
 				E109ED061E519181000E384A /* GameViewController.swift in Sources */,
 				E149A5491F045F7D00CF8FA1 /* OptionScene.swift in Sources */,
 				E109EDD01E52D68C000E384A /* Player.swift in Sources */,
 				E109ECFE1E519181000E384A /* AppDelegate.swift in Sources */,
+				E11BDE1A1F0CEFB600427132 /* GameplayController.swift in Sources */,
 				E149A5401F03B54A00CF8FA1 /* MainMenuScene.swift in Sources */,
 				E1C568B11E65551D005E332A /* Background.swift in Sources */,
 			);

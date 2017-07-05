@@ -19,6 +19,7 @@ class MainMenuScene: SKScene {
             let location = touch.location(in: self)
             let node = nodes(at: location)[0]
             if node.name == "StartGameButton" {
+                GameManager.instance.gameStartedFromMainMenu = true
                 showScene(scene: GameplayScene(fileNamed: "GameplayScene")!)
             } else if node.name == "HighScoreButton" {
                 showScene(scene: HighScoreScene(fileNamed: "HighScoreScene")!)
