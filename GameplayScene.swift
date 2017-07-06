@@ -46,7 +46,7 @@ class GameplayScene: SKScene {
         
         cloudsController.arrangeCloudsInScene(scene: self.scene!, distanceBetweenClouds: distanceBetweenClouds, centre: centre!, minX: minX, maxX: maxX, initialClouds: true)
         
-        self.distanceBeforeCreatingNewClouds = (self.mainCamera?.position.y)! - 400
+        self.distanceBeforeCreatingNewClouds = self.mainCamera!.position.y - 400
     }
     
     func createBackgrounds() {
@@ -144,8 +144,8 @@ class GameplayScene: SKScene {
     }
     
     func createNewClouds() {
-        if (self.distanceBeforeCreatingNewClouds > (self.mainCamera?.position.y)!) {
-            self.distanceBeforeCreatingNewClouds = (self.mainCamera?.position.y)!
+        if self.distanceBeforeCreatingNewClouds > self.mainCamera!.position.y {
+            self.distanceBeforeCreatingNewClouds = self.mainCamera!.position.y - 400
             self.cloudsController.arrangeCloudsInScene(scene: self, distanceBetweenClouds: distanceBetweenClouds, centre: centre!, minX: minX, maxX: maxX, initialClouds: false)
         }
         
