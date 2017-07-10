@@ -43,4 +43,19 @@ class GameplayController {
         scoreLabel!.text = "\(score!)"
     }
     
+    func incremenetScore() {
+        score = score! + 1
+        updateLabels()
+    }
+    
+    func incrementLife() {
+        life = life! + 1
+        updateLabels()
+    }
+    
+    func incremenetCoins() {
+        coins = coins! + 1
+        updateLabels()
+    }
+    
 }

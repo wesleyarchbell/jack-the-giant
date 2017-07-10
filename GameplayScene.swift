@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-class GameplayScene: SKScene {
+class GameplayScene: SKScene, SKPhysicsContactDelegate {
     
     var cloudsController = CloudController()
     var mainCamera: SKCameraNode?
@@ -47,6 +47,30 @@ class GameplayScene: SKScene {
         cloudsController.arrangeCloudsInScene(scene: self.scene!, distanceBetweenClouds: distanceBetweenClouds, centre: centre!, minX: minX, maxX: maxX, initialClouds: true)
         
         self.distanceBeforeCreatingNewClouds = self.mainCamera!.position.y - 400
+        self.physicsWorld.contactDelegate = self
+    }
+    
+    func didBegin(_ contact: SKPhysicsContact) {
+        var playerBody = SKPhysicsBody()
+        var collectableBody = SKPhysicsBody()
+        if contact.bodyA.node!.name == "Player" {
+            playerBody = contact.bodyA
+            collectableBody = contact.bodyB
+        } else if contact.bodyB.node!.name == "Player" {
+            playerBody = contact.bodyB
+            collectableBody = contact.bodyB
+        }
+        if playerBody.node?.name == "Player" && collectableBody.node?.name == "Coin" {
+            //play sound
+            GameplayController.instance.incremenetCoins()
+            collectableBody.node?.removeFromParent()
+        } else if playerBody.node?.name == "Player" && collectableBody.node?.name == "Life" {
+            GameplayController.instance.incrementLife()
+            collectableBody.node?.removeFromParent()
+        } else if playerBody.node?.name == "Player" && collectableBody.node?.name == "Dark Cloud" {
+            
+            //todo
+        }
     }
     
     func createBackgrounds() {
@@ -66,6 +90,7 @@ class GameplayScene: SKScene {
         managePlayer()
         manageBackgrounds()
         createNewClouds()
+        player!.updateScore()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

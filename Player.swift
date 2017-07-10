@@ -16,12 +16,13 @@ struct ColliderType {
 
 class Player: SKSpriteNode {
     
-    
+    private var lastY = CGFloat()
     private var playerTextureAtlas = SKTextureAtlas()
     private var playerAnimation = [SKTexture]()
     private var animatePlayerAction = SKAction()
     
     func initPlayerAndAnimations() {
+       
         self.playerTextureAtlas = SKTextureAtlas(named: "Player.atlas")
         for i in 2...playerTextureAtlas.textureNames.count {
             playerAnimation.append(SKTexture(imageNamed: "Player \(i)"))
@@ -36,6 +37,7 @@ class Player: SKSpriteNode {
         self.physicsBody?.categoryBitMask = ColliderType.Player
         self.physicsBody?.collisionBitMask = ColliderType.Cloud
         self.physicsBody?.contactTestBitMask = ColliderType.DarkCloudAndCollectables
+        self.lastY = self.position.y
     }
     
     func animatePlayer(moveLeft: Bool) {
@@ -55,11 +57,17 @@ class Player: SKSpriteNode {
     }
     
     func movePlayer(moveLeft: Bool) {
-        
         if moveLeft {
             self.position.x -= 7
         } else {
             self.position.x += 7
+        }
+    }
+    
+    func updateScore() {
+        if self.position.y < self.lastY {
+            GameplayController.instance.incremenetScore()
+            self.lastY = self.position.y
         }
     }
     
