@@ -16,12 +16,12 @@ class CloudController {
     func createClouds() -> [SKSpriteNode] {
         
         var clouds = [SKSpriteNode]()
-        for i in 0..<2 {
-            clouds.append(createCloud(imageName: "Cloud 1", name: "1", categoryBitMask: ColliderType.Cloud))
-            clouds.append(createCloud(imageName: "Cloud 2", name: "2", categoryBitMask: ColliderType.Cloud))
-            clouds.append(createCloud(imageName: "Cloud 3", name: "3", categoryBitMask: ColliderType.Cloud))
+//        for i in 0..<2 {
+            clouds.append(createCloud(imageName: "Cloud 1", name: "Cloud 1", categoryBitMask: ColliderType.Cloud))
+            clouds.append(createCloud(imageName: "Cloud 2", name: "Cloud 2", categoryBitMask: ColliderType.Cloud))
+            clouds.append(createCloud(imageName: "Cloud 3", name: "Cloud 3", categoryBitMask: ColliderType.Cloud))
             clouds.append(createCloud(imageName: "Dark Cloud", name: "Dark Cloud", categoryBitMask: ColliderType.DarkCloudAndCollectables))
-        }
+//        }
         clouds = shuffleClouds(clouds: clouds)
         return clouds
         
@@ -99,8 +99,6 @@ class CloudController {
             scene.addChild(clouds[i])
             positionY -= distanceBetweenClouds // move cloud down to next posisition
             lastCloudsPositionY = positionY
-            
-            
         }
         
     }

@@ -25,8 +25,11 @@ class GameplayScene: SKScene, SKPhysicsContactDelegate {
     
     var centre: CGFloat?
     var distanceBetweenClouds = CGFloat(240)
-    var minX = CGFloat(-160)
-    var maxX = CGFloat(160)
+    var minX = CGFloat(-150)
+    var maxX = CGFloat(150)
+    
+    private let playerMinX = CGFloat(-210)
+    private let playerMaxX = CGFloat(210)
     
     var pausePanel: SKSpriteNode?
     
@@ -74,9 +77,9 @@ class GameplayScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func createBackgrounds() {
-        bg1 = childNode(withName: "BG1") as? Background!
-        bg2 = childNode(withName: "BG2") as? Background!
-        bg3 = childNode(withName: "BG3") as? Background!
+        bg1 = childNode(withName: "BG 1") as? Background!
+        bg2 = childNode(withName: "BG 2") as? Background!
+        bg3 = childNode(withName: "BG 3") as? Background!
     }
     
     func createGameLabels() {
@@ -156,6 +159,19 @@ class GameplayScene: SKScene, SKPhysicsContactDelegate {
         if canMove {
             player?.movePlayer(moveLeft: moveLeft)
         }
+        
+        if (self.player?.position.x)! > self.playerMaxX {
+            self.player?.position.x = self.playerMaxX
+        } else if (self.player?.position.x)! < self.playerMinX {
+            self.player?.position.x = self.playerMinX
+        }
+        
+        if (self.mainCamera?.position.y)! - (self.scene?.size.height)!/2 > (self.player?.position.y)! + 50 {
+            self.scene?.isPaused = true
+        } else if (self.mainCamera?.position.y)! + (self.scene?.size.height)!/2 < (self.player?.position.y)! - 60 {
+            self.scene?.isPaused = true
+        }
+        
     }
     
     func moveCameraDown() {
@@ -172,8 +188,18 @@ class GameplayScene: SKScene, SKPhysicsContactDelegate {
         if self.distanceBeforeCreatingNewClouds > self.mainCamera!.position.y {
             self.distanceBeforeCreatingNewClouds = self.mainCamera!.position.y - 400
             self.cloudsController.arrangeCloudsInScene(scene: self, distanceBetweenClouds: distanceBetweenClouds, centre: centre!, minX: minX, maxX: maxX, initialClouds: false)
+            removeOffScreenNodes()
         }
-        
+    }
+    
+    func removeOffScreenNodes() {
+        for child in children {
+            if child.position.y > ((self.mainCamera?.position.y)! + ((self.scene?.size.height)! / 2)) {
+                if child.name!.components(separatedBy: " ")[0] != "BG" {
+                    child.removeFromParent()
+                }
+            }
+        }
     }
     
 }
