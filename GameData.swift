@@ -22,7 +22,7 @@ class GameData: NSCoder {
     private var _mediumDifficultySetting: Bool?
     private var _hardDifficultySetting: Bool?
     
-    public var _musicOn = false
+    private var _musicOn = false
     
     override init() {}
     

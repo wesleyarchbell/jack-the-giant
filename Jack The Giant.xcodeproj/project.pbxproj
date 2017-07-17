@@ -353,8 +353,8 @@
 				E149A53D1F038F4400CF8FA1 /* MainMenuScene.sks */,
 				E149A53F1F03B54A00CF8FA1 /* MainMenuScene.swift */,
 				E149A5421F03B97E00CF8FA1 /* HighScoreScene.sks */,
-				E149A5441F03BC9F00CF8FA1 /* OptionScene.sks */,
 				E149A5461F045F4D00CF8FA1 /* HighScoreScene.swift */,
+				E149A5441F03BC9F00CF8FA1 /* OptionScene.sks */,
 				E149A5481F045F7D00CF8FA1 /* OptionScene.swift */,
 			);
 			name = Scene;

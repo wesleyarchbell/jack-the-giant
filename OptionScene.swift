@@ -10,8 +10,20 @@ import SpriteKit
 
 class OptionScene: SKScene {
     
+    private var easyButton: SKSpriteNode?
+    private var mediumButton: SKSpriteNode?
+    private var hardButton: SKSpriteNode?
+    private var tick: SKSpriteNode?
+    
     override func didMove(to view: SKView) {
         
+    }
+    
+    private func initVariables() {
+        self.easyButton = self.childNode(withName: "EasyButton") as? SKSpriteNode!
+        self.mediumButton = self.childNode(withName: "MediumButton") as? SKSpriteNode!
+        self.hardButton = self.childNode(withName: "HardButton") as? SKSpriteNode!
+        self.tick = self.childNode(withName: "Tick") as? SKSpriteNode!
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
