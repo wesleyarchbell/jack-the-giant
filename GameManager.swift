@@ -11,9 +11,14 @@ import Foundation
 class GameManager {
     
     static let instance = GameManager()
+    
+    public var gameData: GameData?
+    
     private init() {}
     
     var gameStartedFromMainMenu = false
     var gameRestartedFromPlayerDying = false
+    
+    
     
 }

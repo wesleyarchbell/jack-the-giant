@@ -8,57 +8,124 @@
 
 import Foundation
 
-func ==(lhs: DifficultyType, rhs: DifficultyType) -> Bool {
-    return lhs.hashValue == rhs.hashValue
-}
+class GameData: NSCoder {
+    
+    private var _easyDifficultyScore: Int32?
+    private var _mediumDifficultyScore: Int32?
+    private var _hardDifficultyScore: Int32?
+    
+    private var _easyDifficultyCoinScore: Int32?
+    private var _mediumDifficultyCoinScore: Int32?
+    private var _hardDifficultyCoinScore: Int32?
+    
+    private var _easyDifficultySetting: Bool?
+    private var _mediumDifficultySetting: Bool?
+    private var _hardDifficultySetting: Bool?
+    
+    public var _musicOn = false
+    
+    override init() {}
+    
+    convenience init?(coder aDecoder: NSCoder) {
+       self.init()
+       print("Decoding game data...")
+    }
+    
+    func encode(with aCoder: NSCoder) {
+        print("Encoding values...")
+        
+    }
+    
+    var easyDifficultyScore: Int32 {
+        get {
+            return _easyDifficultyScore!
+        }
+        set {
+            _easyDifficultyScore = newValue
+        }
+    }
+    
+    var mediumDifficultyScore: Int32 {
+        get {
+            return _mediumDifficultyScore!
+        }
+        set {
+            _mediumDifficultyScore = newValue
+        }
+    }
 
-struct DifficultyType: Hashable {
-    static let Easy: UInt32 = 0
-    static let Medium: UInt32 = 1
-    static let Hard: UInt32 = 2
-    public var hashValue: Int {
-        return self.hashValue
-    }
-}
-
-
-class GameData {
-    
-    public var difficultyScores: [DifficultyType:Int] = [:]
-    public var difficultyCoinScores: [DifficultyType:Int] = [:]
-    public var difficultySetting: [DifficultyType:Bool] = [:]
-    public var musicOn = false
-    
-    func getScore(difficulty: DifficultyType) -> Int {
-        return self.difficultyScores[difficulty]!
+    var hardDifficultyScore: Int32 {
+        get {
+            return _hardDifficultyScore!
+        }
+        set {
+            _hardDifficultyScore = newValue
+        }
     }
     
-    func setScore(difficulty: DifficultyType, score: Int) {
-        self.difficultyScores[difficulty] = score
+    var easyDifficultyCoinScore: Int32 {
+        get {
+            return _easyDifficultyCoinScore!
+        }
+        set {
+            _easyDifficultyCoinScore = newValue
+        }
     }
     
-    func getCoinScore(difficulty: DifficultyType) -> Int {
-        return self.difficultyCoinScores[difficulty]!
+    var mediumDifficultyCoinScore: Int32 {
+        get {
+            return _mediumDifficultyCoinScore!
+        }
+        set {
+            _mediumDifficultyCoinScore = newValue
+        }
     }
     
-    func setCoinScore(difficulty: DifficultyType, score: Int) {
-        self.difficultyCoinScores[difficulty] = score
+    var hardDifficultyCoinScore: Int32 {
+        get {
+            return _hardDifficultyCoinScore!
+        }
+        set {
+            _hardDifficultyCoinScore = newValue
+        }
     }
     
-    func isDifficultySet(difficulty: DifficultyType) -> Bool {
-        return self.difficultySetting[difficulty]!
+    var easyDifficultySetting: Bool {
+        get {
+            return _easyDifficultySetting!
+        }
+        set {
+            _easyDifficultySetting = newValue
+        }
     }
     
-    func setDifficulty(difficulty: DifficultyType, on: Bool) {
-        self.difficultySetting[difficulty] = on
+    var mediumDifficultySetting: Bool {
+        get {
+            return _mediumDifficultySetting!
+        }
+        set {
+            _mediumDifficultySetting = newValue
+        }
     }
     
-    func isMusicOn() -> Bool {
-        return self.musicOn
+    var hardDifficultySetting: Bool {
+        get {
+            return _hardDifficultySetting!
+        }
+        set {
+            _hardDifficultySetting = newValue
+        }
     }
     
-    func setMusicOn(on: Bool) {
-        self.musicOn = on
+    var musicSetting: Bool {
+        get {
+            return _musicOn
+        }
+        set {
+            _musicOn = newValue
+        }
     }
+    
+    
 }
 
