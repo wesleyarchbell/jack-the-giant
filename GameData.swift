@@ -8,124 +8,68 @@
 
 import Foundation
 
-class GameData: NSCoder {
+class GameData: NSObject, NSCoding {
     
-    private var _easyDifficultyScore: Int32?
-    private var _mediumDifficultyScore: Int32?
-    private var _hardDifficultyScore: Int32?
+    struct Keys {
+        static let EasyDifficultyScore = "EasyDifficultyScore";
+        static let MediumDifficultyScore = "MediumDifficultyScore";
+        static let HardDifficultyScore = "HardDifficultyScore";
+        
+        static let EasyDifficultyCoinScore = "EasyDifficultyCoinScore";
+        static let MediumDifficultyCoinScore = "MediumDifficultyCoinScore";
+        static let HardDifficultyCoinScore = "HardDifficultyCoinScore";
+        
+        static let EasyDifficulty = "EasyDifficulty";
+        static let MediumDifficulty = "MediumDifficulty";
+        static let HardDifficulty = "HardDifficulty";
+        
+        static let Music = "Music";
+    }
     
-    private var _easyDifficultyCoinScore: Int32?
-    private var _mediumDifficultyCoinScore: Int32?
-    private var _hardDifficultyCoinScore: Int32?
+    public var easyDifficultyScore = Int32()
+    public var mediumDifficultyScore = Int32()
+    public var hardDifficultyScore = Int32()
     
-    private var _easyDifficultySetting: Bool?
-    private var _mediumDifficultySetting: Bool?
-    private var _hardDifficultySetting: Bool?
+    public var easyDifficultyCoinScore = Int32()
+    public var mediumDifficultyCoinScore = Int32()
+    public var hardDifficultyCoinScore = Int32()
     
-    private var _musicOn = false
+    public var easyDifficultySetting = false
+    public var mediumDifficultySetting = true
+    public var hardDifficultySetting = false
+    
+    public var musicOn = false
     
     override init() {}
     
-    convenience init?(coder aDecoder: NSCoder) {
-       self.init()
-       print("Decoding game data...")
+    
+    required init?(coder aDecoder: NSCoder) {
+        print("Decoding game data...")
+        
+        self.easyDifficultyScore = aDecoder.decodeInt32(forKey: Keys.EasyDifficultyScore)
+        self.mediumDifficultyScore = aDecoder.decodeInt32(forKey: Keys.MediumDifficultyScore)
+        self.hardDifficultyScore = aDecoder.decodeInt32(forKey: Keys.HardDifficultyScore)
+        self.easyDifficultyCoinScore = aDecoder.decodeInt32(forKey: Keys.EasyDifficultyCoinScore)
+        self.mediumDifficultyCoinScore = aDecoder.decodeInt32(forKey: Keys.MediumDifficultyCoinScore)
+        self.hardDifficultyCoinScore = aDecoder.decodeInt32(forKey: Keys.HardDifficultyCoinScore)
+        self.easyDifficultySetting = aDecoder.decodeBool(forKey: Keys.EasyDifficulty)
+        self.mediumDifficultySetting = aDecoder.decodeBool(forKey: Keys.MediumDifficulty)
+        self.hardDifficultySetting = aDecoder.decodeBool(forKey: Keys.HardDifficulty)
+        self.musicOn = aDecoder.decodeBool(forKey: Keys.Music)
     }
     
     func encode(with aCoder: NSCoder) {
-        print("Encoding values...")
-        
+        print("Encoding game data...")
+        aCoder.encode(self.easyDifficultyScore, forKey: Keys.EasyDifficultyScore)
+        aCoder.encode(self.mediumDifficultyScore, forKey: Keys.MediumDifficultyScore)
+        aCoder.encode(self.hardDifficultyScore, forKey: Keys.HardDifficultyScore)
+        aCoder.encode(self.easyDifficultyCoinScore, forKey: Keys.EasyDifficultyCoinScore)
+        aCoder.encode(self.mediumDifficultyCoinScore, forKey: Keys.MediumDifficultyCoinScore)
+        aCoder.encode(self.hardDifficultyCoinScore, forKey: Keys.HardDifficultyCoinScore)
+        aCoder.encode(self.easyDifficultySetting, forKey: Keys.EasyDifficulty)
+        aCoder.encode(self.mediumDifficultySetting, forKey: Keys.MediumDifficulty)
+        aCoder.encode(self.hardDifficultySetting, forKey: Keys.HardDifficulty)
+        aCoder.encode(self.musicOn, forKey: Keys.Music)
     }
-    
-    var easyDifficultyScore: Int32 {
-        get {
-            return _easyDifficultyScore!
-        }
-        set {
-            _easyDifficultyScore = newValue
-        }
-    }
-    
-    var mediumDifficultyScore: Int32 {
-        get {
-            return _mediumDifficultyScore!
-        }
-        set {
-            _mediumDifficultyScore = newValue
-        }
-    }
-
-    var hardDifficultyScore: Int32 {
-        get {
-            return _hardDifficultyScore!
-        }
-        set {
-            _hardDifficultyScore = newValue
-        }
-    }
-    
-    var easyDifficultyCoinScore: Int32 {
-        get {
-            return _easyDifficultyCoinScore!
-        }
-        set {
-            _easyDifficultyCoinScore = newValue
-        }
-    }
-    
-    var mediumDifficultyCoinScore: Int32 {
-        get {
-            return _mediumDifficultyCoinScore!
-        }
-        set {
-            _mediumDifficultyCoinScore = newValue
-        }
-    }
-    
-    var hardDifficultyCoinScore: Int32 {
-        get {
-            return _hardDifficultyCoinScore!
-        }
-        set {
-            _hardDifficultyCoinScore = newValue
-        }
-    }
-    
-    var easyDifficultySetting: Bool {
-        get {
-            return _easyDifficultySetting!
-        }
-        set {
-            _easyDifficultySetting = newValue
-        }
-    }
-    
-    var mediumDifficultySetting: Bool {
-        get {
-            return _mediumDifficultySetting!
-        }
-        set {
-            _mediumDifficultySetting = newValue
-        }
-    }
-    
-    var hardDifficultySetting: Bool {
-        get {
-            return _hardDifficultySetting!
-        }
-        set {
-            _hardDifficultySetting = newValue
-        }
-    }
-    
-    var musicSetting: Bool {
-        get {
-            return _musicOn
-        }
-        set {
-            _musicOn = newValue
-        }
-    }
-    
-    
 }
 

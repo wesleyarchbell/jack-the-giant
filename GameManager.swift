@@ -28,7 +28,7 @@ class GameManager {
             self.gameData?.easyDifficultySetting = false
             self.gameData?.mediumDifficultySetting = true
             self.gameData?.hardDifficultySetting = false
-            self.gameData?.musicSetting = true
+            self.gameData?.musicOn = true
             saveData()
         }
         loadData()
