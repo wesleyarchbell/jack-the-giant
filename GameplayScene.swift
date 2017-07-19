@@ -31,6 +31,10 @@ class GameplayScene: SKScene, SKPhysicsContactDelegate {
     private let playerMinX = CGFloat(-210)
     private let playerMaxX = CGFloat(210)
     
+    private var acceleration = CGFloat()
+    private var cameraSpeed = CGFloat()
+    private var maxSpeed = CGFloat()
+    
     var pausePanel: SKSpriteNode?
     
     override func didMove(to view: SKView) {
@@ -51,6 +55,24 @@ class GameplayScene: SKScene, SKPhysicsContactDelegate {
         
         self.distanceBeforeCreatingNewClouds = self.mainCamera!.position.y - 400
         self.physicsWorld.contactDelegate = self
+        
+        setCameraSpeedSettings()
+    }
+    
+    private func setCameraSpeedSettings() {
+        if (GameManager.instance.gameData?.easyDifficultySetting)! {
+            acceleration = 0.02
+            cameraSpeed = 1.5
+            maxSpeed = 4
+        } else if (GameManager.instance.gameData?.mediumDifficultySetting)! {
+            acceleration = 0.04
+            cameraSpeed = 2
+            maxSpeed = 6
+        } else if (GameManager.instance.gameData?.hardDifficultySetting)! {
+            acceleration = 0.06
+            cameraSpeed = 2.5
+            maxSpeed = 8
+        }
     }
     
     func didBegin(_ contact: SKPhysicsContact) {
@@ -168,14 +190,22 @@ class GameplayScene: SKScene, SKPhysicsContactDelegate {
         
         if (self.mainCamera?.position.y)! - (self.scene?.size.height)!/2 > (self.player?.position.y)! + 50 {
             self.scene?.isPaused = true
+            // player went above screen
         } else if (self.mainCamera?.position.y)! + (self.scene?.size.height)!/2 < (self.player?.position.y)! - 60 {
             self.scene?.isPaused = true
+            // player went below screen
         }
         
     }
     
     func moveCameraDown() {
-        self.mainCamera?.position.y -= 3
+        
+        self.cameraSpeed = self.cameraSpeed + self.acceleration
+        if (self.cameraSpeed > self.maxSpeed) {
+            self.cameraSpeed = self.maxSpeed
+        }
+        
+        self.mainCamera?.position.y -= self.cameraSpeed
     }
     
     func manageBackgrounds() {
