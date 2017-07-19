@@ -21,14 +21,17 @@ class HighScoreScene: SKScene {
     
     private func setScore() {
         if (GameManager.instance.gameData?.easyDifficultySetting)! {
-            self.scoreLabel?.text = String(describing: GameManager.instance.gameData?.easyDifficultyScore)
-            self.coinLabel?.text = String(describing: GameManager.instance.gameData?.easyDifficultyCoinScore)
+            print("Displaying easy scores..")
+            self.scoreLabel?.text = String(describing: (GameManager.instance.gameData?.easyDifficultyScore)!)
+            self.coinLabel?.text = String(describing: (GameManager.instance.gameData?.easyDifficultyCoinScore)!)
         } else if (GameManager.instance.gameData?.mediumDifficultySetting)! {
-            self.scoreLabel?.text = String(describing: GameManager.instance.gameData?.mediumDifficultyScore)
-            self.coinLabel?.text = String(describing: GameManager.instance.gameData?.mediumDifficultyCoinScore)
+            print("Displaying medium scores..")
+            self.scoreLabel?.text = String(describing: (GameManager.instance.gameData?.mediumDifficultyScore)!)
+            self.coinLabel?.text = String(describing: (GameManager.instance.gameData?.mediumDifficultyCoinScore)!)
         } else if (GameManager.instance.gameData?.hardDifficultySetting)! {
-            self.scoreLabel?.text = String(describing: GameManager.instance.gameData?.hardDifficultyScore)
-            self.coinLabel?.text = String(describing: GameManager.instance.gameData?.hardDifficultyCoinScore)
+            print("Displaying hard scores..")
+            self.scoreLabel?.text = String(describing: (GameManager.instance.gameData?.hardDifficultyScore)!)
+            self.coinLabel?.text = String(describing: (GameManager.instance.gameData?.hardDifficultyCoinScore)!)
         }
     }
     

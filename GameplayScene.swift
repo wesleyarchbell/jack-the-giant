@@ -93,8 +93,9 @@ class GameplayScene: SKScene, SKPhysicsContactDelegate {
             GameplayController.instance.incrementLife()
             collectableBody.node?.removeFromParent()
         } else if playerBody.node?.name == "Player" && collectableBody.node?.name == "Dark Cloud" {
-            
-            //todo
+            self.scene?.isPaused = true
+            playerBody.node?.removeFromParent()
+            Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(GameplayScene.playerDied), userInfo: nil, repeats: false)
         }
     }
     
@@ -190,12 +191,11 @@ class GameplayScene: SKScene, SKPhysicsContactDelegate {
         
         if (self.mainCamera?.position.y)! - (self.scene?.size.height)!/2 > (self.player?.position.y)! + 50 {
             self.scene?.isPaused = true
-            // player went above screen
+            Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(GameplayScene.playerDied), userInfo: nil, repeats: false)
         } else if (self.mainCamera?.position.y)! + (self.scene?.size.height)!/2 < (self.player?.position.y)! - 60 {
             self.scene?.isPaused = true
-            // player went below screen
+            Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(GameplayScene.playerDied), userInfo: nil, repeats: false)
         }
-        
     }
     
     func moveCameraDown() {
@@ -230,6 +230,62 @@ class GameplayScene: SKScene, SKPhysicsContactDelegate {
                 }
             }
         }
+    }
+    
+    func playerDied() {
+        print("Player died")
+        GameplayController.instance.life = (GameplayController.instance.life)! - 1
+        if (GameplayController.instance.life)! >= 0 {
+            print("Player has more life(s) left.")
+            GameManager.instance.gameRestartedFromPlayerDying = true
+            showScene(scene: GameplayScene(fileNamed: "GameplayScene")!)
+            GameplayController.instance.lifeLabel?.text = "x\((GameplayController.instance.life)!)"
+        } else {
+            print("Player has no more lives left")
+            var playerGotNewHighScore = false
+            if (GameManager.instance.gameData?.easyDifficultySetting)! {
+                playerGotNewHighScore = true
+                if (GameplayController.instance.score)! > (GameManager.instance.gameData?.easyDifficultyScore)! {
+                    print("New easy highscore: \((GameplayController.instance.score)!)")
+                    GameManager.instance.gameData?.easyDifficultyScore = (GameplayController.instance.score)!
+                }
+                if (GameplayController.instance.coins)! > (GameManager.instance.gameData?.easyDifficultyCoinScore)! {
+                    print("New easy coin highscore: \((GameplayController.instance.coins)!)")
+                    GameManager.instance.gameData?.easyDifficultyCoinScore = (GameplayController.instance.coins)!
+                }
+            } else if (GameManager.instance.gameData?.mediumDifficultySetting)! {
+                playerGotNewHighScore = true
+                if (GameplayController.instance.score)! > (GameManager.instance.gameData?.mediumDifficultyScore)! {
+                    print("New medium highscore: \((GameplayController.instance.score)!)")
+                    GameManager.instance.gameData?.mediumDifficultyScore = (GameplayController.instance.score)!
+                }
+                if (GameplayController.instance.coins)! > (GameManager.instance.gameData?.mediumDifficultyCoinScore)! {
+                    print("New medium coin highscore: \((GameplayController.instance.coins)!)")
+                    GameManager.instance.gameData?.mediumDifficultyCoinScore = (GameplayController.instance.coins)!
+                }
+            } else if (GameManager.instance.gameData?.hardDifficultySetting)! {
+                playerGotNewHighScore = true
+                if (GameplayController.instance.score)! > (GameManager.instance.gameData?.hardDifficultyScore)! {
+                    print("New hard highscore: \((GameplayController.instance.score)!)")
+                    GameManager.instance.gameData?.hardDifficultyScore = (GameplayController.instance.score)!
+                }
+                if (GameplayController.instance.coins)! > (GameManager.instance.gameData?.hardDifficultyCoinScore)! {
+                    print("New hard coin highscore: \((GameplayController.instance.coins)!)")
+                    GameManager.instance.gameData?.hardDifficultyCoinScore = (GameplayController.instance.coins)!
+                }
+            }
+            GameManager.instance.saveData()
+            if playerGotNewHighScore {
+               showScene(scene: HighScoreScene(fileNamed: "HighScoreScene")!) 
+            } else {
+                showScene(scene: OptionScene(fileNamed: "MainMenuScene")!)
+            }
+        }
+    }
+    
+    private func showScene(scene: SKScene) {
+        scene.scaleMode = SKSceneScaleMode.aspectFill
+        self.view?.presentScene(scene, transition: SKTransition.doorsCloseHorizontal(withDuration: 1))
     }
     
 }
