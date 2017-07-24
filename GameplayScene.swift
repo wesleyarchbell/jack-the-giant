@@ -173,6 +173,34 @@ class GameplayScene: SKScene, SKPhysicsContactDelegate {
         self.mainCamera?.addChild(pausePanel!)
     }
     
+    func createScorePanel() {
+        
+        let scorePanel = SKSpriteNode(imageNamed: "Show Score")
+        scorePanel.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+        scorePanel.zPosition = 8
+        scorePanel.xScale = 1.5
+        scorePanel.yScale = 1.5
+        scorePanel.position = CGPoint(x: (self.mainCamera?.frame.size.width)! / 2, y: (self.mainCamera?.frame.size.height)! / 2)
+        
+        let scoreLabel = SKLabelNode(fontNamed: "Blow")
+        scoreLabel.zPosition = 7
+        scoreLabel.fontSize = 50
+        scoreLabel.position.x = scorePanel.position.x - 60
+        scoreLabel.position.y = scorePanel.position.y + 10
+        scoreLabel.text = "\(GameplayController.instance.score!)"
+        
+        let coinLabel = SKLabelNode(fontNamed: "Blow")
+        coinLabel.zPosition = 7
+        coinLabel.fontSize = 50
+        coinLabel.position.x = scorePanel.position.x - 60
+        coinLabel.position.y = scorePanel.position.y - 105
+        coinLabel.text = "\(GameplayController.instance.coins!)"
+        
+        scorePanel.addChild(scoreLabel)
+        scorePanel.addChild(coinLabel)
+        self.mainCamera?.addChild(scorePanel)
+    }
+    
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         canMove = false
         player?.stopPlayerAnimation() 
@@ -242,9 +270,9 @@ class GameplayScene: SKScene, SKPhysicsContactDelegate {
             GameplayController.instance.lifeLabel?.text = "x\((GameplayController.instance.life)!)"
         } else {
             print("Player has no more lives left")
-            var playerGotNewHighScore = false
+            
             if (GameManager.instance.gameData?.easyDifficultySetting)! {
-                playerGotNewHighScore = true
+                
                 if (GameplayController.instance.score)! > (GameManager.instance.gameData?.easyDifficultyScore)! {
                     print("New easy highscore: \((GameplayController.instance.score)!)")
                     GameManager.instance.gameData?.easyDifficultyScore = (GameplayController.instance.score)!
@@ -254,7 +282,7 @@ class GameplayScene: SKScene, SKPhysicsContactDelegate {
                     GameManager.instance.gameData?.easyDifficultyCoinScore = (GameplayController.instance.coins)!
                 }
             } else if (GameManager.instance.gameData?.mediumDifficultySetting)! {
-                playerGotNewHighScore = true
+                
                 if (GameplayController.instance.score)! > (GameManager.instance.gameData?.mediumDifficultyScore)! {
                     print("New medium highscore: \((GameplayController.instance.score)!)")
                     GameManager.instance.gameData?.mediumDifficultyScore = (GameplayController.instance.score)!
@@ -264,7 +292,7 @@ class GameplayScene: SKScene, SKPhysicsContactDelegate {
                     GameManager.instance.gameData?.mediumDifficultyCoinScore = (GameplayController.instance.coins)!
                 }
             } else if (GameManager.instance.gameData?.hardDifficultySetting)! {
-                playerGotNewHighScore = true
+                
                 if (GameplayController.instance.score)! > (GameManager.instance.gameData?.hardDifficultyScore)! {
                     print("New hard highscore: \((GameplayController.instance.score)!)")
                     GameManager.instance.gameData?.hardDifficultyScore = (GameplayController.instance.score)!
@@ -275,11 +303,7 @@ class GameplayScene: SKScene, SKPhysicsContactDelegate {
                 }
             }
             GameManager.instance.saveData()
-            if playerGotNewHighScore {
-               showScene(scene: HighScoreScene(fileNamed: "HighScoreScene")!) 
-            } else {
-                showScene(scene: OptionScene(fileNamed: "MainMenuScene")!)
-            }
+            createScorePanel()
         }
     }
     
