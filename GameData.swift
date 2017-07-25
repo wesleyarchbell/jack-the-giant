@@ -38,7 +38,7 @@ class GameData: NSObject, NSCoding {
     public var mediumDifficultySetting = true
     public var hardDifficultySetting = false
     
-    public var musicOn = false
+    public var musicOn = true
     
     override init() {}
     

@@ -95,7 +95,7 @@ class GameplayScene: SKScene, SKPhysicsContactDelegate {
         } else if playerBody.node?.name == "Player" && collectableBody.node?.name == "Dark Cloud" {
             self.scene?.isPaused = true
             playerBody.node?.removeFromParent()
-            Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(GameplayScene.playerDied), userInfo: nil, repeats: false)
+            self.displayScorePanelAndKillPlayer()
         }
     }
     
@@ -140,9 +140,7 @@ class GameplayScene: SKScene, SKPhysicsContactDelegate {
                 self.pausePanel?.removeFromParent()
                 self.isPaused = false
             } else if nodes(at: location)[0].name == "QuitButton" {
-                let mainMenuScene = MainMenuScene(fileNamed: "MainMenuScene")
-                mainMenuScene?.scaleMode = SKSceneScaleMode.aspectFill
-                self.view?.presentScene(mainMenuScene!, transition: SKTransition.doorsCloseHorizontal(withDuration: 1))
+                showScene(scene: MainMenuScene(fileNamed: "MainMenuScene")!)
             }
         }
         canMove = true
@@ -219,11 +217,16 @@ class GameplayScene: SKScene, SKPhysicsContactDelegate {
         
         if (self.mainCamera?.position.y)! - (self.scene?.size.height)!/2 > (self.player?.position.y)! + 50 {
             self.scene?.isPaused = true
-            Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(GameplayScene.playerDied), userInfo: nil, repeats: false)
+            self.displayScorePanelAndKillPlayer()
         } else if (self.mainCamera?.position.y)! + (self.scene?.size.height)!/2 < (self.player?.position.y)! - 60 {
             self.scene?.isPaused = true
-            Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(GameplayScene.playerDied), userInfo: nil, repeats: false)
+            self.displayScorePanelAndKillPlayer()
         }
+    }
+    
+    func displayScorePanelAndKillPlayer() {
+        createScorePanel()
+        Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(GameplayScene.playerDied), userInfo: nil, repeats: false)
     }
     
     func moveCameraDown() {
@@ -264,7 +267,7 @@ class GameplayScene: SKScene, SKPhysicsContactDelegate {
         print("Player died")
         GameplayController.instance.life = (GameplayController.instance.life)! - 1
         if (GameplayController.instance.life)! >= 0 {
-            print("Player has more life(s) left.")
+            print("Player has more \(GameplayController.instance.life! + 1) left.")
             GameManager.instance.gameRestartedFromPlayerDying = true
             showScene(scene: GameplayScene(fileNamed: "GameplayScene")!)
             GameplayController.instance.lifeLabel?.text = "x\((GameplayController.instance.life)!)"
@@ -303,7 +306,7 @@ class GameplayScene: SKScene, SKPhysicsContactDelegate {
                 }
             }
             GameManager.instance.saveData()
-            createScorePanel()
+            showScene(scene: MainMenuScene(fileNamed: "MainMenuScene")!)
         }
     }
     

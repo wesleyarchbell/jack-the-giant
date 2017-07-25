@@ -69,6 +69,7 @@
 		E149A5471F045F4D00CF8FA1 /* HighScoreScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E149A5461F045F4D00CF8FA1 /* HighScoreScene.swift */; };
 		E149A5491F045F7D00CF8FA1 /* OptionScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E149A5481F045F7D00CF8FA1 /* OptionScene.swift */; };
 		E14F93711F17642800942EE6 /* GameData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14F93701F17642800942EE6 /* GameData.swift */; };
+		E19B8B5B1F271CAB004A3562 /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19B8B5A1F271CAB004A3562 /* AudioManager.swift */; };
 		E1C568B11E65551D005E332A /* Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1C568B01E65551D005E332A /* Background.swift */; };
 		E1C568B31E655AB1005E332A /* CloudController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1C568B21E655AB1005E332A /* CloudController.swift */; };
 /* End PBXBuildFile section */
@@ -138,6 +139,7 @@
 		E149A5461F045F4D00CF8FA1 /* HighScoreScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HighScoreScene.swift; sourceTree = "<group>"; };
 		E149A5481F045F7D00CF8FA1 /* OptionScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionScene.swift; sourceTree = "<group>"; };
 		E14F93701F17642800942EE6 /* GameData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameData.swift; sourceTree = "<group>"; };
+		E19B8B5A1F271CAB004A3562 /* AudioManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
 		E1C568B01E65551D005E332A /* Background.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Background.swift; sourceTree = "<group>"; };
 		E1C568B21E655AB1005E332A /* CloudController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -203,6 +205,7 @@
 		E109EDCA1E525EB4000E384A /* Game */ = {
 			isa = PBXGroup;
 			children = (
+				E19B8B591F271C9A004A3562 /* Audio */,
 				E14F93721F1CCEF900942EE6 /* Manager */,
 				E14F936F1F17641700942EE6 /* Data */,
 				E11BDE181F0CEF9000427132 /* Controller */,
@@ -385,6 +388,14 @@
 			name = Manager;
 			sourceTree = "<group>";
 		};
+		E19B8B591F271C9A004A3562 /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				E19B8B5A1F271CAB004A3562 /* AudioManager.swift */,
+			);
+			name = Audio;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -514,6 +525,7 @@
 				E109ED061E519181000E384A /* GameViewController.swift in Sources */,
 				E149A5491F045F7D00CF8FA1 /* OptionScene.swift in Sources */,
 				E109EDD01E52D68C000E384A /* Player.swift in Sources */,
+				E19B8B5B1F271CAB004A3562 /* AudioManager.swift in Sources */,
 				E109ECFE1E519181000E384A /* AppDelegate.swift in Sources */,
 				E11BDE1E1F0D9EBD00427132 /* CollectableController.swift in Sources */,
 				E11BDE1A1F0CEFB600427132 /* GameplayController.swift in Sources */,

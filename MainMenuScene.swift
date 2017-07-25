@@ -10,8 +10,15 @@ import SpriteKit
 
 class MainMenuScene: SKScene {
     
+    fileprivate var musicButton: SKSpriteNode?
+    fileprivate var musicOn = SKTexture(imageNamed: "Music On Button")
+    fileprivate var musicOff = SKTexture(imageNamed: "Music Off Button")
+    
     override func didMove(to view: SKView) {
         GameManager.instance.initGameData()
+        AudioManager.instance.playMusic()
+        
+        self.musicButton = childNode(withName: "MusicButton") as! SKSpriteNode!
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -25,14 +32,28 @@ class MainMenuScene: SKScene {
                 showScene(scene: HighScoreScene(fileNamed: "HighScoreScene")!)
             } else if node.name == "OptionsButton" {
                 showScene(scene: OptionScene(fileNamed: "OptionScene")!)
+            } else if node.name == "MusicButton" {
+                handleMusicToggle()
             }
         }
     }
     
+    func handleMusicToggle() {
+        if (GameManager.instance.gameData?.musicOn)! {
+            GameManager.instance.gameData?.musicOn = false
+            self.musicButton?.texture = self.musicOff
+            AudioManager.instance.stopMusic()
+        } else {
+            GameManager.instance.gameData?.musicOn = true
+            self.musicButton?.texture = self.musicOn
+            AudioManager.instance.playMusic()
+        }
+        GameManager.instance.saveData()
+    }
+    
     func showScene(scene: SKScene) {
         scene.scaleMode = SKSceneScaleMode.aspectFill
-        self.view?.presentScene(scene, transition: SKTransition.doorsCloseHorizontal(withDuration: 1))
+        view?.presentScene(scene, transition: SKTransition.doorsCloseHorizontal(withDuration: 1))
     }
     
 }
-
